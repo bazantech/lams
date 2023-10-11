@@ -13,6 +13,7 @@ steps:
 - task: Ant@1
   inputs:
     buildFile: 'lams_build/build.xml'
+    targets: 'deploy-lams'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
