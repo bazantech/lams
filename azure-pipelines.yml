@@ -12,8 +12,7 @@ pool:
 steps:
 - task: Ant@1
   inputs:
-    workingDirectory: 'lams_build'
-    buildFile: 'build.xml'
+    buildFile: 'lams_build/build.xml'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
