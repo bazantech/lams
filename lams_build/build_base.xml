@@ -18,10 +18,10 @@
 	
 	<!-- Set library paths -->
 	<path id="libs.classpath" >
-		<fileset dir="../../lams/lams_build/lib">
+		<fileset dir="../lams_build/lib">
 			<include name="**/*.jar" />
 		</fileset>
-		<fileset file="../../lams/lams_common/build/lib/lams.jar" />
+		<fileset file="../lams_common/build/lib/lams.jar" />
 		<!-- Same list as in projects' .classpath file references to WildFly modules.
 			 They need to be exactly listed as **/*.jar would load other versions of JARs
 			 that are also present in lams_build/lib.
@@ -134,9 +134,9 @@
 	<target name="copy-tags" description="Copies LAMS TLD and TAGs.">
 		<echo>${ant.project.name}: Copying tags from Central</echo>
    		<copy todir="${conf.web.dir}/WEB-INF/tlds/lams" 
-   			  file="../../lams/lams_central/web/WEB-INF/tlds/lams/lams.tld" overwrite="true" verbose="true" />	
+   			  file="../lams_central/web/WEB-INF/tlds/lams/lams.tld" overwrite="true" verbose="true" />
 		<copy todir="${conf.web.dir}/WEB-INF/tags" overwrite="true" verbose="true">
-			<fileset dir="../../lams/lams_central/web/WEB-INF/tags" />
+			<fileset dir="../lams_central/web/WEB-INF/tags" />
 		</copy>
 	</target>
 	
@@ -152,7 +152,7 @@
 			 password="${db.password}"
 			 encoding="utf8">
 			<classpath>
-				<fileset dir="../../lams/lams_build/lib/mysql" includes="*.jar"/> 
+				<fileset dir="../lams_build/lib/mysql" includes="*.jar"/>
 			</classpath>
 			<transaction src="${sql.script}" />
 		</sql>
@@ -162,7 +162,7 @@
 	<!-- Compilations								                      -->
 	<!-- ================================================================ -->
 
-	<available property="common.jar.exists" file="../../lams/lams_common/build/lib/lams.jar" type="file" />
+	<available property="common.jar.exists" file="../lams_common/build/lib/lams.jar" type="file" />
 	
 	<target name="_build-common" unless="common.jar.exists">
 		<ant antfile="../lams_common/build.xml" target="_build-jar" inheritAll="false"/>
