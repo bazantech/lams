@@ -34,6 +34,11 @@ steps:
   displayName: 'Install and Configure MySQL'
 
 - script: |
+    # Install Apache Ant
+    sudo apt-get install ant
+  displayName: 'Install Apache Ant'
+
+- script: |
     # Add your custom configuration steps for WildFly
     # For example, deploying your application to WildFly
   displayName: 'Custom Configuration Steps for WildFly'
