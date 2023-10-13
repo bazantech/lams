@@ -16,10 +16,7 @@ steps:
     ls /opt/wildfly/wildfly-29.0.1.Final/bin -la
 
     # Set environment variable for WildFly
-    echo 'export JBOSS_HOME="/opt/wildfly/wildfly-29.0.1.Final"' >> ~/.bashrc
-    source ~/.bashrc
-    echo $JBOSS_HOME
-
+    export JBOSS_HOME="/opt/wildfly/wildfly-29.0.1.Final"
     # Verify the installation
     $JBOSS_HOME/bin/standalone.sh --version
   displayName: 'Install WildFly 29.0.1.Final'
