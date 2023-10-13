@@ -12,6 +12,7 @@ steps:
     # Download and extract WildFly
     wget -P /opt/wildfly https://github.com/wildfly/wildfly/releases/download/29.0.1.Final/wildfly-29.0.1.Final.tar.gz
     tar -xzf /opt/wildfly/wildfly-29.0.1.Final.tar.gz -C /opt/wildfly
+    ls /opt/wildfly -la
 
     # Set environment variable for WildFly
     echo 'export JBOSS_HOME="/opt/wildfly/wildfly-29.0.1.Final"' >> ~/.bashrc
