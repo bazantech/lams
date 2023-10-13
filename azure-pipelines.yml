@@ -5,16 +5,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Ant@1
-  inputs:
-    buildFile: 'lams_build/build.xml'
-    targets: 'deploy-lams'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-
 - script: |
     # Create a directory to store WildFly
     mkdir -p /opt/wildfly
@@ -32,14 +22,36 @@ steps:
   displayName: 'Install WildFly 29.0.1.Final'
 
 - script: |
-    # Add your custom configuration steps here
-    # For example, deploying your application to WildFly
-  displayName: 'Custom Configuration Steps'
+    # Install MySQL
+    sudo apt-get update
+    sudo apt-get install mysql-server -y
+
+    # Configure MySQL (e.g., create databases, users, etc.)
+    # Use mysql commands here to set up your MySQL environment
+
+    # Start MySQL service
+    sudo service mysql start
+  displayName: 'Install and Configure MySQL'
 
 - script: |
-    # Run your Ant task to deploy your application on WildFly
-    cd /path/to/your/ant/build/file
-    ant your-ant-target
+    # Add your custom configuration steps for WildFly
+    # For example, deploying your application to WildFly
+  displayName: 'Custom Configuration Steps for WildFly'
+
+- script: |
+    # Add your custom configuration steps for MySQL
+    # For example, creating databases and configuring access
+  displayName: 'Custom Configuration Steps for MySQL'
+
+- task: Ant@1
+  inputs:
+    buildFile: 'lams_build/build.xml'
+    targets: 'deploy-lams'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
   displayName: 'Run Ant Task'
 
 # Add more steps if needed
