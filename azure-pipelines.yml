@@ -1,8 +1,3 @@
-# Ant
-# Build your Java projects and run tests with Apache Ant.
-# Add steps that save build artifacts and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
 - v4.6
 
@@ -19,3 +14,32 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
+
+- script: |
+    # Create a directory to store WildFly
+    mkdir -p /opt/wildfly
+
+    # Download and extract WildFly
+    wget -P /opt/wildfly https://github.com/wildfly/wildfly/releases/download/29.0.1.Final/wildfly-29.0.1.Final.tar.gz
+    tar -xzf /opt/wildfly/wildfly-29.0.1.Final.tar.gz -C /opt/wildfly
+
+    # Set environment variable for WildFly
+    echo 'export JBOSS_HOME="/opt/wildfly/wildfly-29.0.1.Final"' >> ~/.bashrc
+    source ~/.bashrc
+
+    # Verify the installation
+    $JBOSS_HOME/bin/standalone.sh --version
+  displayName: 'Install WildFly 29.0.1.Final'
+
+- script: |
+    # Add your custom configuration steps here
+    # For example, deploying your application to WildFly
+  displayName: 'Custom Configuration Steps'
+
+- script: |
+    # Run your Ant task to deploy your application on WildFly
+    cd /path/to/your/ant/build/file
+    ant your-ant-target
+  displayName: 'Run Ant Task'
+
+# Add more steps if needed
